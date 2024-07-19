@@ -16,13 +16,21 @@
     <textarea id="bookmarkletInput" placeholder="Paste your bookmarklet here..."></textarea>
     <button id="convertButton">Convert</button>
     <h2>JavaScript Output</h2>
-    <textarea id="javascriptOutput" readonly></textarea>
+    <textarea id="output" readonly></textarea>
+    <button id="copyButton">Copy to Clipboard</button>
 
     <script>
         document.getElementById('convertButton').addEventListener('click', function() {
             const bookmarklet = document.getElementById('bookmarkletInput').value;
-            const jsCode = decodeURIComponent(bookmarklet.replace(/^javascript:/, ''));
-            document.getElementById('javascriptOutput').value = jsCode;
+            const jsOutput = decodeURIComponent(bookmarklet.replace(/^javascript:/, ''));
+            document.getElementById('output').value = jsOutput;
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
         });
     </script>
 </body>
